@@ -98,10 +98,10 @@ Pixel 929 (0,29) = F8F8F8 | Pixel 930 (1,29) = F8F8F8 | Pixel 931 (2,29) = F8F8F
 Pixel 961 (0,30) = F8F8F8 | Pixel 962 (1,30) = F8F8F8 | Pixel 963 (2,30) = F8F8F8 | Pixel 964 (3,30) = F8F8F8 | Pixel 965 (4,30) = F8F8F8 | Pixel 966 (5,30) = F8F8F8 | Pixel 967 (6,30) = F8F8F8 | Pixel 968 (7,30) = F8F8F8 | Pixel 969 (8,30) = F8F8F8 | Pixel 970 (9,30) = F8F8F8 | Pixel 971 (10,30) = F8F8F8 | Pixel 972 (11,30) = F8F8F8 | Pixel 973 (12,30) = F8F8F8 | Pixel 974 (13,30) = F8F8F8 | Pixel 975 (14,30) = F8F8F8 | Pixel 976 (15,30) = F8F8F8 | Pixel 977 (16,30) = F8F8F8 | Pixel 978 (17,30) = F8F8F8 | Pixel 979 (18,30) = F8F8F8 | Pixel 980 (19,30) = F8F8F8 | Pixel 981 (20,30) = F8F8F8 | Pixel 982 (21,30) = F8F8F8 | Pixel 983 (22,30) = F8F8F8 | Pixel 984 (23,30) = F8F8F8 | Pixel 985 (24,30) = F8F8F8 | Pixel 986 (25,30) = F8F8F8 | Pixel 987 (26,30) = F8F8F8 | Pixel 988 (27,30) = F8F8F8 | Pixel 989 (28,30) = F8F8F8 | Pixel 990 (29,30) = F8F8F8 | Pixel 991 (30,30) = F8F8F8 | Pixel 992 (31,30) = F8F8F8
 Pixel 993 (0,31) = F8F8F8 | Pixel 994 (1,31) = F8F8F8 | Pixel 995 (2,31) = F8F8F8 | Pixel 996 (3,31) = F8F8F8 | Pixel 997 (4,31) = F8F8F8 | Pixel 998 (5,31) = F8F8F8 | Pixel 999 (6,31) = F8F8F8 | Pixel 1000 (7,31) = F8F8F8 | Pixel 1001 (8,31) = F8F8F8 | Pixel 1002 (9,31) = F8F8F8 | Pixel 1003 (10,31) = F8F8F8 | Pixel 1004 (11,31) = F8F8F8 | Pixel 1005 (12,31) = F8F8F8 | Pixel 1006 (13,31) = F8F8F8 | Pixel 1007 (14,31) = F8F8F8 | Pixel 1008 (15,31) = F8F8F8 | Pixel 1009 (16,31) = F8F8F8 | Pixel 1010 (17,31) = F8F8F8 | Pixel 1011 (18,31) = F8F8F8 | Pixel 1012 (19,31) = F8F8F8 | Pixel 1013 (20,31) = F8F8F8 | Pixel 1014 (21,31) = F8F8F8 | Pixel 1015 (22,31) = F8F8F8 | Pixel 1016 (23,31) = F8F8F8 | Pixel 1017 (24,31) = F8F8F8 | Pixel 1018 (25,31) = F8F8F8 | Pixel 1019 (26,31) = F8F8F8 | Pixel 1020 (27,31) = F8F8F8 | Pixel 1021 (28,31) = F8F8F8 | Pixel 1022 (29,31) = F8F8F8 | Pixel 1023 (30,31) = F8F8F8 | Pixel 1024 (31,31) = F8F8F8
 ]]
-    }
+    },
     {
-        name = "Arte paisagem",
-        map = [[
+    name = "Arte paisagem",
+    map = [[
 Pixel 1 (0,0) = 684669 | Pixel 2 (1,0) = 684669 | Pixel 3 (2,0) = 684669 | Pixel 4 (3,0) = 684669 | Pixel 5 (4,0) = 684669 | Pixel 6 (5,0) = 684669 | Pixel 7 (6,0) = 684669 | Pixel 8 (7,0) = 684669 | Pixel 9 (8,0) = 684669 | Pixel 10 (9,0) = 684669 | Pixel 11 (10,0) = 684669 | Pixel 12 (11,0) = 684669 | Pixel 13 (12,0) = 684669 | Pixel 14 (13,0) = 684669 | Pixel 15 (14,0) = 684669 | Pixel 16 (15,0) = 684669 | Pixel 17 (16,0) = 684669 | Pixel 18 (17,0) = 684669 | Pixel 19 (18,0) = 684669 | Pixel 20 (19,0) = 684669 | Pixel 21 (20,0) = 684669 | Pixel 22 (21,0) = 684669 | Pixel 23 (22,0) = 684669 | Pixel 24 (23,0) = 684669 | Pixel 25 (24,0) = 684669 | Pixel 26 (25,0) = 684669 | Pixel 27 (26,0) = 684669 | Pixel 28 (27,0) = 684669 | Pixel 29 (28,0) = 684669 | Pixel 30 (29,0) = 684669 | Pixel 31 (30,0) = 684669 | Pixel 32 (31,0) = 684669
 Pixel 33 (0,1) = 684669 | Pixel 34 (1,1) = 684669 | Pixel 35 (2,1) = 684669 | Pixel 36 (3,1) = 684669 | Pixel 37 (4,1) = 684669 | Pixel 38 (5,1) = 664769 | Pixel 39 (6,1) = 654769 | Pixel 40 (7,1) = 66466D | Pixel 41 (8,1) = 66466D | Pixel 42 (9,1) = 66466B | Pixel 43 (10,1) = 66466B | Pixel 44 (11,1) = 66466D | Pixel 45 (12,1) = 6C4469 | Pixel 46 (13,1) = 69446D | Pixel 47 (14,1) = 684667 | Pixel 48 (15,1) = 684669 | Pixel 49 (16,1) = 684669 | Pixel 50 (17,1) = 684669 | Pixel 51 (18,1) = 684669 | Pixel 52 (19,1) = 684669 | Pixel 53 (20,1) = 654866 | Pixel 54 (21,1) = 66466D | Pixel 55 (22,1) = 66466D | Pixel 56 (23,1) = 66466B | Pixel 57 (24,1) = 66466B | Pixel 58 (25,1) = 68456D | Pixel 59 (26,1) = 664767 | Pixel 60 (27,1) = 684669 | Pixel 61 (28,1) = 684669 | Pixel 62 (29,1) = 684669 | Pixel 63 (30,1) = 684669 | Pixel 64 (31,1) = 684669
 Pixel 65 (0,2) = 684669 | Pixel 66 (1,2) = 684669 | Pixel 67 (2,2) = 684669 | Pixel 68 (3,2) = 684669 | Pixel 69 (4,2) = 674568 | Pixel 70 (5,2) = 6A4869 | Pixel 71 (6,2) = 6E4968 | Pixel 72 (7,2) = 644567 | Pixel 73 (8,2) = 644567 | Pixel 74 (9,2) = 644567 | Pixel 75 (10,2) = 644567 | Pixel 76 (11,2) = 644567 | Pixel 77 (12,2) = 644469 | Pixel 78 (13,2) = 654668 | Pixel 79 (14,2) = 69456B | Pixel 80 (15,2) = 684669 | Pixel 81 (16,2) = 684669 | Pixel 82 (17,2) = 6A4469 | Pixel 83 (18,2) = 684669 | Pixel 84 (19,2) = 684669 | Pixel 85 (20,2) = 69476A | Pixel 86 (21,2) = 644668 | Pixel 87 (22,2) = 644567 | Pixel 88 (23,2) = 644567 | Pixel 89 (24,2) = 634567 | Pixel 90 (25,2) = 634665 | Pixel 91 (26,2) = 6E496A | Pixel 92 (27,2) = 684669 | Pixel 93 (28,2) = 684669 | Pixel 94 (29,2) = 684669 | Pixel 95 (30,2) = 684669 | Pixel 96 (31,2) = 684669
@@ -135,7 +135,25 @@ Pixel 929 (0,29) = 530026 | Pixel 930 (1,29) = 86234F | Pixel 931 (2,29) = 3C000
 Pixel 961 (0,30) = 0B071E | Pixel 962 (1,30) = 031019 | Pixel 963 (2,30) = 1E0322 | Pixel 964 (3,30) = 762F5B | Pixel 965 (4,30) = 891755 | Pixel 966 (5,30) = 9D0D40 | Pixel 967 (6,30) = E34965 | Pixel 968 (7,30) = 98012A | Pixel 969 (8,30) = 960735 | Pixel 970 (9,30) = 9C043F | Pixel 971 (10,30) = 4F0024 | Pixel 972 (11,30) = 622B53 | Pixel 973 (12,30) = 16101C | Pixel 974 (13,30) = 110A1C | Pixel 975 (14,30) = 1E1324 | Pixel 976 (15,30) = 100C1A | Pixel 977 (16,30) = 0E0D1B | Pixel 978 (17,30) = 0F0D1B | Pixel 979 (18,30) = 100C1B | Pixel 980 (19,30) = 100C1B | Pixel 981 (20,30) = 100C1B | Pixel 982 (21,30) = 100C1B | Pixel 983 (22,30) = 100C1B | Pixel 984 (23,30) = 100C1B | Pixel 985 (24,30) = 100C1B | Pixel 986 (25,30) = 100C1B | Pixel 987 (26,30) = 100C1B | Pixel 988 (27,30) = 100C1B | Pixel 989 (28,30) = 100C1B | Pixel 990 (29,30) = 100C1B | Pixel 991 (30,30) = 100C1B | Pixel 992 (31,30) = 100C1B
 Pixel 993 (0,31) = 100C1B | Pixel 994 (1,31) = 100C1B | Pixel 995 (2,31) = 100C1B | Pixel 996 (3,31) = 130A1B | Pixel 997 (4,31) = 0E0E1A | Pixel 998 (5,31) = 120B1B | Pixel 999 (6,31) = 150A1B | Pixel 1000 (7,31) = 19081B | Pixel 1001 (8,31) = 120B1B | Pixel 1002 (9,31) = 100C1B | Pixel 1003 (10,31) = 120B1B | Pixel 1004 (11,31) = 120B1B | Pixel 1005 (12,31) = 100C1B | Pixel 1006 (13,31) = 100C1B | Pixel 1007 (14,31) = 130A1B | Pixel 1008 (15,31) = 120B1B | Pixel 1009 (16,31) = 100C1B | Pixel 1010 (17,31) = 100C1B | Pixel 1011 (18,31) = 100C1B | Pixel 1012 (19,31) = 100C1B | Pixel 1013 (20,31) = 100C1B | Pixel 1014 (21,31) = 100C1B | Pixel 1015 (22,31) = 100C1B | Pixel 1016 (23,31) = 100C1B | Pixel 1017 (24,31) = 100C1B | Pixel 1018 (25,31) = 100C1B | Pixel 1019 (26,31) = 100C1B | Pixel 1020 (27,31) = 100C1B | Pixel 1021 (28,31) = 100C1B | Pixel 1022 (29,31) = 100C1B | Pixel 1023 (30,31) = 100C1B | Pixel 1024 (31,31) = 100C1B
 ]]
-    }
+},
+{
+    name = "Arte Fofa 2",
+    map = [[
+AQUI
+]]
+},
+{
+    name = "Arte Fofa 3",
+    map = [[
+AQUI
+]]
+},
+{
+    name = "Arte Fofa 4",
+    map = [[
+AQUI
+]]
+}
     -- Adicione mais artes seguindo o mesmo modelo
 }
 
