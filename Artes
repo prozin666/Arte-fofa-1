@@ -10,9 +10,7 @@ local remote = game.ReplicatedStorage:FindFirstChild("UpdateBoard")
 local GRID = 32
 local TOTAL = GRID * GRID
 
--- ======================
 -- UTIL: índice lógico -> board (espelho X)
--- ======================
 local function logicalToBoardIndex(pixel)
     local zero = pixel - 1
     local y = math.floor(zero / GRID)
@@ -24,7 +22,7 @@ end
 -- ======================
 -- AREA PARA COLOCAR SUAS ARTES
 -- ======================
--- Coloque aqui cada arte: name = nome, map = string com os hexs (1024 pixels)
+-- Coloque cada arte: name = nome, map = string com os hexs (1024 pixels)
 -- Use [[ ... ]] para strings gigantes
 local arts = {
     {
@@ -105,7 +103,7 @@ Pixel 993 (0,31) = F8F8F8 | Pixel 994 (1,31) = F8F8F8 | Pixel 995 (2,31) = F8F8F
 }
 
 -- ======================
--- ART BUFFER (branco padrão)
+-- ART BUFFER
 -- ======================
 local art = {}
 for i = 1, TOTAL do art[i] = "FFFFFF" end
@@ -126,6 +124,11 @@ local function parseTextToArt(text)
     end
     return count
 end
+
+-- ======================
+-- VARIÁVEL GLOBAL PARA A ARTE SELECIONADA
+-- ======================
+local selectedMap = nil
 
 -- ======================
 -- GUI MÓVEL
@@ -179,7 +182,7 @@ local uiLayout = Instance.new("UIListLayout", artList)
 uiLayout.SortOrder = Enum.SortOrder.LayoutOrder
 uiLayout.Padding = UDim.new(0,2)
 
--- Preview (texto curto apenas para identificação)
+-- Preview (apenas identificação)
 local preview = Instance.new("TextLabel", frame)
 preview.Size = UDim2.new(1,-10,0,20)
 preview.Position = UDim2.new(0,5,0,120)
@@ -243,7 +246,7 @@ local function addArt(name,map)
 
     btn.MouseButton1Click:Connect(function()
         preview.Text = "Preview: AQUI"
-        preview._map = map
+        selectedMap = map  -- <- variável separada, não dentro do TextLabel
     end)
 
     artList.CanvasSize = UDim2.new(0,0,0,uiLayout.AbsoluteContentSize.Y + 4)
@@ -251,7 +254,7 @@ end
 
 clearArtList()
 for _,entry in ipairs(arts) do
-    addArt(entry.name,entry.map)
+    addArt(entry.name, entry.map)
 end
 
 -- ======================
@@ -259,8 +262,8 @@ end
 -- ======================
 task.spawn(function()
     while true do
-        if loopActive and preview._map and preview._map ~= "" then
-            parseTextToArt(preview._map)
+        if loopActive and selectedMap and selectedMap ~= "" then
+            parseTextToArt(selectedMap)
             local packet = {}
             local count = 0
             for i = 1, TOTAL do
