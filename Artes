@@ -1,27 +1,35 @@
+-- ======================
 -- PIXEL PAINTER CENTRAL (DELTA)
 -- HUD compacta, flutuante, móvel
+-- ======================
 
 local player = game.Players.LocalPlayer
 local remote = game.ReplicatedStorage:FindFirstChild("UpdateBoard")
     or game.Workspace:FindFirstChild("UpdateBoard", true)
 
 local GRID = 32
-local TOTAL = GRID*GRID
+local TOTAL = GRID * GRID
 
+-- ======================
 -- UTIL: índice lógico -> board (espelho X)
+-- ======================
 local function logicalToBoardIndex(pixel)
-    local zero = pixel-1
-    local y = math.floor(zero/GRID)
+    local zero = pixel - 1
+    local y = math.floor(zero / GRID)
     local x = zero % GRID
-    local flippedX = (GRID-1)-x
-    return y*GRID+flippedX+1
+    local flippedX = (GRID - 1) - x
+    return y * GRID + flippedX + 1
 end
 
 -- ======================
--- ARTS (cole suas hexs aqui)
+-- AREA PARA COLOCAR SUAS ARTES
 -- ======================
+-- Coloque aqui cada arte: name = nome, map = string com os hexs (1024 pixels)
+-- Use [[ ... ]] para strings gigantes
 local arts = {
-    {name="Arte Fofa ", map=[[
+    {
+        name = "Arte Fofa 1",
+        map = [[
 Pixel 1 (0,0) = FFFFFF | Pixel 2 (1,0) = FFFFFF | Pixel 3 (2,0) = FFFFFF | Pixel 4 (3,0) = FFFFFF | Pixel 5 (4,0) = FFFFFF | Pixel 6 (5,0) = FEFEFE | Pixel 7 (6,0) = F2E8E6 | Pixel 8 (7,0) = E77994 | Pixel 9 (8,0) = FF649E | Pixel 10 (9,0) = FF94C0 | Pixel 11 (10,0) = DC7996 | Pixel 12 (11,0) = E06488 | Pixel 13 (12,0) = FF619D | Pixel 14 (13,0) = FE6EA3 | Pixel 15 (14,0) = FB6099 | Pixel 16 (15,0) = D08B8E | Pixel 17 (16,0) = E6A8B7 | Pixel 18 (17,0) = DE7184 | Pixel 19 (18,0) = FB679B | Pixel 20 (19,0) = FF76AA | Pixel 21 (20,0) = F58FB4 | Pixel 22 (21,0) = D46880 | Pixel 23 (22,0) = F36394 | Pixel 24 (23,0) = FF5B97 | Pixel 25 (24,0) = F45E8B | Pixel 26 (25,0) = E4C6C4 | Pixel 27 (26,0) = FEFEFE | Pixel 28 (27,0) = FFFFFF | Pixel 29 (28,0) = FFFFFF | Pixel 30 (29,0) = FFFFFF | Pixel 31 (30,0) = FFFFFF | Pixel 32 (31,0) = FFFFFF
 Pixel 33 (0,1) = FFFFFF | Pixel 34 (1,1) = FFFFFF | Pixel 35 (2,1) = FFFFFF | Pixel 36 (3,1) = FFFFFF | Pixel 37 (4,1) = FFFFFF | Pixel 38 (5,1) = FDFBFC | Pixel 39 (6,1) = DA848D | Pixel 40 (7,1) = FD6CA3 | Pixel 41 (8,1) = FC9AC1 | Pixel 42 (9,1) = FC97C1 | Pixel 43 (10,1) = FC72A6 | Pixel 44 (11,1) = FD75A5 | Pixel 45 (12,1) = FE85B2 | Pixel 46 (13,1) = FE78AB | Pixel 47 (14,1) = FF7AAD | Pixel 48 (15,1) = C5797B | Pixel 49 (16,1) = D7909E | Pixel 50 (17,1) = E2788E | Pixel 51 (18,1) = FB83B0 | Pixel 52 (19,1) = F8ADCE | Pixel 53 (20,1) = FB8CB7 | Pixel 54 (21,1) = FC81AF | Pixel 55 (22,1) = FC76A9 | Pixel 56 (23,1) = FD70A4 | Pixel 57 (24,1) = FF6CA4 | Pixel 58 (25,1) = E991AA | Pixel 59 (26,1) = EBECE7 | Pixel 60 (27,1) = FFFFFF | Pixel 61 (28,1) = FFFFFF | Pixel 62 (29,1) = FFFFFF | Pixel 63 (30,1) = FFFFFF | Pixel 64 (31,1) = FFFFFF
 Pixel 65 (0,2) = FFFFFF | Pixel 66 (1,2) = FFFFFF | Pixel 67 (2,2) = FFFFFF | Pixel 68 (3,2) = FFFFFF | Pixel 69 (4,2) = FFFFFF | Pixel 70 (5,2) = E8DFD0 | Pixel 71 (6,2) = EA698F | Pixel 72 (7,2) = FBA1C5 | Pixel 73 (8,2) = FDA9CB | Pixel 74 (9,2) = FB86B2 | Pixel 75 (10,2) = FC89B4 | Pixel 76 (11,2) = FC9EC2 | Pixel 77 (12,2) = FE94BC | Pixel 78 (13,2) = FD97BC | Pixel 79 (14,2) = FB9DC1 | Pixel 80 (15,2) = B9706A | Pixel 81 (16,2) = CD888B | Pixel 82 (17,2) = D8828D | Pixel 83 (18,2) = FDB7D3 | Pixel 84 (19,2) = FABCD5 | Pixel 85 (20,2) = FC9AC0 | Pixel 86 (21,2) = FA9BBD | Pixel 87 (22,2) = FF8FB7 | Pixel 88 (23,2) = FD8AB5 | Pixel 89 (24,2) = FBA4C7 | Pixel 90 (25,2) = FAA6CA | Pixel 91 (26,2) = DEB7B0 | Pixel 92 (27,2) = FEFEFE | Pixel 93 (28,2) = FFFFFF | Pixel 94 (29,2) = FFFFFF | Pixel 95 (30,2) = FFFFFF | Pixel 96 (31,2) = FFFFFF
@@ -54,8 +62,11 @@ Pixel 897 (0,28) = F5B0B5 | Pixel 898 (1,28) = F4ACAD | Pixel 899 (2,28) = F0A9B
 Pixel 929 (0,29) = F2ABB1 | Pixel 930 (1,29) = F8B1B9 | Pixel 931 (2,29) = F2AAB8 | Pixel 932 (3,29) = F4AFC2 | Pixel 933 (4,29) = F6AEC2 | Pixel 934 (5,29) = C77583 | Pixel 935 (6,29) = DD8093 | Pixel 936 (7,29) = EC9BAE | Pixel 937 (8,29) = E3B0AD | Pixel 938 (9,29) = F0C2B3 | Pixel 939 (10,29) = D790A0 | Pixel 940 (11,29) = B66C83 | Pixel 941 (12,29) = 98596E | Pixel 942 (13,29) = F2DBCD | Pixel 943 (14,29) = CDB6A8 | Pixel 944 (15,29) = E7D6C6 | Pixel 945 (16,29) = FAECDF | Pixel 946 (17,29) = F2E5D4 | Pixel 947 (18,29) = D2B8AB | Pixel 948 (19,29) = F8CFB9 | Pixel 949 (20,29) = C68984 | Pixel 950 (21,29) = C06576 | Pixel 951 (22,29) = EC8FA4 | Pixel 952 (23,29) = D47C92 | Pixel 953 (24,29) = D98795 | Pixel 954 (25,29) = F3A2B1 | Pixel 955 (26,29) = E89FAA | Pixel 956 (27,29) = E8999F | Pixel 957 (28,29) = F0AAB2 | Pixel 958 (29,29) = FCBEC1 | Pixel 959 (30,29) = F2ABA7 | Pixel 960 (31,29) = E28782
 Pixel 961 (0,30) = F8B1B5 | Pixel 962 (1,30) = F4AEB9 | Pixel 963 (2,30) = F9B5C4 | Pixel 964 (3,30) = F0B0C0 | Pixel 965 (4,30) = FCB5C7 | Pixel 966 (5,30) = CB7A8D | Pixel 967 (6,30) = F1A2B5 | Pixel 968 (7,30) = F7AABE | Pixel 969 (8,30) = E3ABB4 | Pixel 970 (9,30) = FAD7C3 | Pixel 971 (10,30) = D79EA5 | Pixel 972 (11,30) = A35F76 | Pixel 973 (12,30) = 97566E | Pixel 974 (13,30) = F5E3D5 | Pixel 975 (14,30) = CFB39E | Pixel 976 (15,30) = 9C5A4C | Pixel 977 (16,30) = D59184 | Pixel 978 (17,30) = CC8374 | Pixel 979 (18,30) = E9C8B7 | Pixel 980 (19,30) = E7C7BC | Pixel 981 (20,30) = E699AD | Pixel 982 (21,30) = C26779 | Pixel 983 (22,30) = E08292 | Pixel 984 (23,30) = DF7D8A | Pixel 985 (24,30) = D38696 | Pixel 986 (25,30) = D78089 | Pixel 987 (26,30) = E1888E | Pixel 988 (27,30) = FBB5BD | Pixel 989 (28,30) = FEBBC4 | Pixel 990 (29,30) = F0ABA6 | Pixel 991 (30,30) = E79482 | Pixel 992 (31,30) = E9ADAC
 Pixel 993 (0,31) = E49996 | Pixel 994 (1,31) = F8ACB6 | Pixel 995 (2,31) = F8B2BD | Pixel 996 (3,31) = E9A6B8 | Pixel 997 (4,31) = F5B1C6 | Pixel 998 (5,31) = CC8195 | Pixel 999 (6,31) = F094AB | Pixel 1000 (7,31) = EB93AB | Pixel 1001 (8,31) = D4929C | Pixel 1002 (9,31) = F5DFD2 | Pixel 1003 (10,31) = C5ACA8 | Pixel 1004 (11,31) = 8D4D65 | Pixel 1005 (12,31) = A05F77 | Pixel 1006 (13,31) = F5E5D6 | Pixel 1007 (14,31) = E0C4B6 | Pixel 1008 (15,31) = E38772 | Pixel 1009 (16,31) = E48873 | Pixel 1010 (17,31) = D99F91 | Pixel 1011 (18,31) = F7E8D5 | Pixel 1012 (19,31) = E4B3B7 | Pixel 1013 (20,31) = F292AE | Pixel 1014 (21,31) = B35064 | Pixel 1015 (22,31) = C46A73 | Pixel 1016 (23,31) = D27587 | Pixel 1017 (24,31) = DD7985 | Pixel 1018 (25,31) = DC7884 | Pixel 1019 (26,31) = F3B2B8 | Pixel 1020 (27,31) = F2B2B2 | Pixel 1021 (28,31) = DA8C82 | Pixel 1022 (29,31) = DF8378 | Pixel 1023 (30,31) = E7ACA4 | Pixel 1024 (31,31) = DBB3A7
-]]},
-    {name="Arte peitos", map=[[
+]]
+    },
+    {
+        name = "Arte peitos",
+        map = [[
 Pixel 1 (0,0) = F8F8F8 | Pixel 2 (1,0) = F8F8F8 | Pixel 3 (2,0) = F8F8F8 | Pixel 4 (3,0) = F8F8F8 | Pixel 5 (4,0) = F8F8F8 | Pixel 6 (5,0) = F8F8F8 | Pixel 7 (6,0) = F8F8F8 | Pixel 8 (7,0) = F8F8F8 | Pixel 9 (8,0) = F8F8F8 | Pixel 10 (9,0) = F8F8F8 | Pixel 11 (10,0) = F8F8F8 | Pixel 12 (11,0) = F8F8F8 | Pixel 13 (12,0) = F8F8F8 | Pixel 14 (13,0) = F8F8F8 | Pixel 15 (14,0) = F8F8F8 | Pixel 16 (15,0) = F8F8F8 | Pixel 17 (16,0) = F8F8F8 | Pixel 18 (17,0) = F8F8F8 | Pixel 19 (18,0) = F8F8F8 | Pixel 20 (19,0) = F8F8F8 | Pixel 21 (20,0) = F8F8F8 | Pixel 22 (21,0) = F8F8F8 | Pixel 23 (22,0) = F8F8F8 | Pixel 24 (23,0) = F8F8F8 | Pixel 25 (24,0) = F8F8F8 | Pixel 26 (25,0) = F8F8F8 | Pixel 27 (26,0) = F8F8F8 | Pixel 28 (27,0) = F8F8F8 | Pixel 29 (28,0) = F8F8F8 | Pixel 30 (29,0) = F8F8F8 | Pixel 31 (30,0) = F8F8F8 | Pixel 32 (31,0) = F8F8F8
 Pixel 33 (0,1) = F8F8F8 | Pixel 34 (1,1) = F8F8F8 | Pixel 35 (2,1) = F8F8F8 | Pixel 36 (3,1) = F8F8F8 | Pixel 37 (4,1) = F8F8F8 | Pixel 38 (5,1) = F8F8F8 | Pixel 39 (6,1) = F8F8F8 | Pixel 40 (7,1) = F8F8F8 | Pixel 41 (8,1) = F8F8F8 | Pixel 42 (9,1) = F8F8F8 | Pixel 43 (10,1) = F8F8F8 | Pixel 44 (11,1) = F8F8F8 | Pixel 45 (12,1) = F8F8F8 | Pixel 46 (13,1) = F8F8F8 | Pixel 47 (14,1) = F8F8F8 | Pixel 48 (15,1) = F8F8F8 | Pixel 49 (16,1) = F8F8F8 | Pixel 50 (17,1) = F8F8F8 | Pixel 51 (18,1) = F8F8F8 | Pixel 52 (19,1) = F8F8F8 | Pixel 53 (20,1) = F8F8F8 | Pixel 54 (21,1) = F8F8F8 | Pixel 55 (22,1) = F8F8F8 | Pixel 56 (23,1) = F8F8F8 | Pixel 57 (24,1) = F8F8F8 | Pixel 58 (25,1) = F8F8F8 | Pixel 59 (26,1) = F8F8F8 | Pixel 60 (27,1) = F8F8F8 | Pixel 61 (28,1) = F8F8F8 | Pixel 62 (29,1) = F8F8F8 | Pixel 63 (30,1) = F8F8F8 | Pixel 64 (31,1) = F8F8F8
 Pixel 65 (0,2) = F8F8F8 | Pixel 66 (1,2) = F8F8F8 | Pixel 67 (2,2) = F8F8F8 | Pixel 68 (3,2) = F8F8F8 | Pixel 69 (4,2) = F8F8F8 | Pixel 70 (5,2) = F8F8F8 | Pixel 71 (6,2) = F8F8F8 | Pixel 72 (7,2) = F8F8F8 | Pixel 73 (8,2) = F8F8F8 | Pixel 74 (9,2) = F8F8F8 | Pixel 75 (10,2) = F8F8F8 | Pixel 76 (11,2) = F8F8F8 | Pixel 77 (12,2) = F8F8F8 | Pixel 78 (13,2) = F8F8F8 | Pixel 79 (14,2) = F8F8F8 | Pixel 80 (15,2) = F8F8F8 | Pixel 81 (16,2) = F8F8F8 | Pixel 82 (17,2) = F8F8F8 | Pixel 83 (18,2) = F8F8F8 | Pixel 84 (19,2) = F8F8F8 | Pixel 85 (20,2) = F8F8F8 | Pixel 86 (21,2) = F8F8F8 | Pixel 87 (22,2) = F8F8F8 | Pixel 88 (23,2) = F8F8F8 | Pixel 89 (24,2) = F8F8F8 | Pixel 90 (25,2) = F8F8F8 | Pixel 91 (26,2) = F8F8F8 | Pixel 92 (27,2) = F8F8F8 | Pixel 93 (28,2) = F8F8F8 | Pixel 94 (29,2) = F8F8F8 | Pixel 95 (30,2) = F8F8F8 | Pixel 96 (31,2) = F8F8F8
@@ -88,23 +99,29 @@ Pixel 897 (0,28) = F8F8F8 | Pixel 898 (1,28) = F8F8F8 | Pixel 899 (2,28) = F8F8F
 Pixel 929 (0,29) = F8F8F8 | Pixel 930 (1,29) = F8F8F8 | Pixel 931 (2,29) = F8F8F8 | Pixel 932 (3,29) = F8F8F8 | Pixel 933 (4,29) = F8F8F8 | Pixel 934 (5,29) = F8F8F8 | Pixel 935 (6,29) = F8F8F8 | Pixel 936 (7,29) = F8F8F8 | Pixel 937 (8,29) = F8F8F8 | Pixel 938 (9,29) = F8F8F8 | Pixel 939 (10,29) = F8F8F8 | Pixel 940 (11,29) = F8F8F8 | Pixel 941 (12,29) = F8F8F8 | Pixel 942 (13,29) = F8F8F8 | Pixel 943 (14,29) = F8F8F8 | Pixel 944 (15,29) = F8F8F8 | Pixel 945 (16,29) = F8F8F8 | Pixel 946 (17,29) = F8F8F8 | Pixel 947 (18,29) = F8F8F8 | Pixel 948 (19,29) = F8F8F8 | Pixel 949 (20,29) = F8F8F8 | Pixel 950 (21,29) = F8F8F8 | Pixel 951 (22,29) = F8F8F8 | Pixel 952 (23,29) = F8F8F8 | Pixel 953 (24,29) = F8F8F8 | Pixel 954 (25,29) = F8F8F8 | Pixel 955 (26,29) = F8F8F8 | Pixel 956 (27,29) = F8F8F8 | Pixel 957 (28,29) = F8F8F8 | Pixel 958 (29,29) = F8F8F8 | Pixel 959 (30,29) = F8F8F8 | Pixel 960 (31,29) = F8F8F8
 Pixel 961 (0,30) = F8F8F8 | Pixel 962 (1,30) = F8F8F8 | Pixel 963 (2,30) = F8F8F8 | Pixel 964 (3,30) = F8F8F8 | Pixel 965 (4,30) = F8F8F8 | Pixel 966 (5,30) = F8F8F8 | Pixel 967 (6,30) = F8F8F8 | Pixel 968 (7,30) = F8F8F8 | Pixel 969 (8,30) = F8F8F8 | Pixel 970 (9,30) = F8F8F8 | Pixel 971 (10,30) = F8F8F8 | Pixel 972 (11,30) = F8F8F8 | Pixel 973 (12,30) = F8F8F8 | Pixel 974 (13,30) = F8F8F8 | Pixel 975 (14,30) = F8F8F8 | Pixel 976 (15,30) = F8F8F8 | Pixel 977 (16,30) = F8F8F8 | Pixel 978 (17,30) = F8F8F8 | Pixel 979 (18,30) = F8F8F8 | Pixel 980 (19,30) = F8F8F8 | Pixel 981 (20,30) = F8F8F8 | Pixel 982 (21,30) = F8F8F8 | Pixel 983 (22,30) = F8F8F8 | Pixel 984 (23,30) = F8F8F8 | Pixel 985 (24,30) = F8F8F8 | Pixel 986 (25,30) = F8F8F8 | Pixel 987 (26,30) = F8F8F8 | Pixel 988 (27,30) = F8F8F8 | Pixel 989 (28,30) = F8F8F8 | Pixel 990 (29,30) = F8F8F8 | Pixel 991 (30,30) = F8F8F8 | Pixel 992 (31,30) = F8F8F8
 Pixel 993 (0,31) = F8F8F8 | Pixel 994 (1,31) = F8F8F8 | Pixel 995 (2,31) = F8F8F8 | Pixel 996 (3,31) = F8F8F8 | Pixel 997 (4,31) = F8F8F8 | Pixel 998 (5,31) = F8F8F8 | Pixel 999 (6,31) = F8F8F8 | Pixel 1000 (7,31) = F8F8F8 | Pixel 1001 (8,31) = F8F8F8 | Pixel 1002 (9,31) = F8F8F8 | Pixel 1003 (10,31) = F8F8F8 | Pixel 1004 (11,31) = F8F8F8 | Pixel 1005 (12,31) = F8F8F8 | Pixel 1006 (13,31) = F8F8F8 | Pixel 1007 (14,31) = F8F8F8 | Pixel 1008 (15,31) = F8F8F8 | Pixel 1009 (16,31) = F8F8F8 | Pixel 1010 (17,31) = F8F8F8 | Pixel 1011 (18,31) = F8F8F8 | Pixel 1012 (19,31) = F8F8F8 | Pixel 1013 (20,31) = F8F8F8 | Pixel 1014 (21,31) = F8F8F8 | Pixel 1015 (22,31) = F8F8F8 | Pixel 1016 (23,31) = F8F8F8 | Pixel 1017 (24,31) = F8F8F8 | Pixel 1018 (25,31) = F8F8F8 | Pixel 1019 (26,31) = F8F8F8 | Pixel 1020 (27,31) = F8F8F8 | Pixel 1021 (28,31) = F8F8F8 | Pixel 1022 (29,31) = F8F8F8 | Pixel 1023 (30,31) = F8F8F8 | Pixel 1024 (31,31) = F8F8F8
-]]}
+]]
+    }
+    -- Adicione mais artes seguindo o mesmo modelo
 }
 
--- ART BUFFER
+-- ======================
+-- ART BUFFER (branco padrão)
+-- ======================
 local art = {}
-for i=1,TOTAL do art[i]="FFFFFF" end
+for i = 1, TOTAL do art[i] = "FFFFFF" end
 
--- PARSER
+-- ======================
+-- PARSER DE MAP
+-- ======================
 local function parseTextToArt(text)
-    for i=1,TOTAL do art[i]="FFFFFF" end
+    for i = 1, TOTAL do art[i] = "FFFFFF" end
     if not text then return 0 end
-    local count=0
-    for idx,hex in text:gmatch("Pixel%s+(%d+).-=%s*([A-Fa-f0-9]+)") do
-        local n=tonumber(idx)
-        if n and n>=1 and n<=TOTAL then
-            art[n]=hex:upper()
-            count=count+1
+    local count = 0
+    for idx, hex in text:gmatch("Pixel%s+(%d+).-=%s*([A-Fa-f0-9]+)") do
+        local n = tonumber(idx)
+        if n and n >= 1 and n <= TOTAL then
+            art[n] = hex:upper()
+            count = count + 1
         end
     end
     return count
@@ -113,95 +130,95 @@ end
 -- ======================
 -- GUI MÓVEL
 -- ======================
-local gui=Instance.new("ScreenGui")
-gui.Name="PixelPainterHUD"
-gui.Parent=player:WaitForChild("PlayerGui")
+local gui = Instance.new("ScreenGui")
+gui.Name = "PixelPainterHUD"
+gui.Parent = player:WaitForChild("PlayerGui")
 
 -- Botão flutuante
-local toggleBtn=Instance.new("TextButton", gui)
-toggleBtn.Size=UDim2.new(0,35,0,30)
-toggleBtn.Position=UDim2.new(1,-45,0,15)
-toggleBtn.Text="🎨"
-toggleBtn.Font=Enum.Font.SourceSans
-toggleBtn.TextSize=20
-toggleBtn.BackgroundColor3=Color3.fromRGB(55,55,55)
-toggleBtn.BorderSizePixel=0
-toggleBtn.TextColor3=Color3.new(1,1,1)
-toggleBtn.AnchorPoint=Vector2.new(0,0)
+local toggleBtn = Instance.new("TextButton", gui)
+toggleBtn.Size = UDim2.new(0, 35, 0, 30)
+toggleBtn.Position = UDim2.new(1, -45, 0, 15)
+toggleBtn.Text = "🎨"
+toggleBtn.Font = Enum.Font.SourceSans
+toggleBtn.TextSize = 20
+toggleBtn.BackgroundColor3 = Color3.fromRGB(55,55,55)
+toggleBtn.BorderSizePixel = 0
+toggleBtn.TextColor3 = Color3.new(1,1,1)
+toggleBtn.AnchorPoint = Vector2.new(0,0)
 
 -- Frame HUD compacto e móvel
-local frame=Instance.new("Frame", gui)
-frame.Size=UDim2.new(0,200,0,150)
-frame.Position=UDim2.new(1,-220,0,50)
-frame.BackgroundColor3=Color3.fromRGB(30,30,30)
-frame.BorderSizePixel=0
-frame.Visible=false
-frame.Active=true
-frame.Draggable=true -- agora pode arrastar
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 220, 0, 160)
+frame.Position = UDim2.new(1, -250, 0, 50)
+frame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+frame.BorderSizePixel = 0
+frame.Visible = false
+frame.Active = true
+frame.Draggable = true
 
 -- Header
-local title=Instance.new("TextLabel", frame)
-title.Size=UDim2.new(1,0,0,20)
-title.Position=UDim2.new(0,0,0,0)
-title.BackgroundTransparency=1
-title.Text="Pixel Painter"
-title.Font=Enum.Font.SourceSansBold
-title.TextSize=14
-title.TextColor3=Color3.new(1,1,1)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1,0,0,20)
+title.Position = UDim2.new(0,0,0,0)
+title.BackgroundTransparency = 1
+title.Text = "Pixel Painter"
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 14
+title.TextColor3 = Color3.new(1,1,1)
 
 -- Lista de artes (scroll)
-local artList=Instance.new("ScrollingFrame", frame)
-artList.Size=UDim2.new(1,-10,0,90)
-artList.Position=UDim2.new(0,5,0,25)
-artList.BackgroundTransparency=0.2
-artList.BackgroundColor3=Color3.fromRGB(40,40,40)
-artList.BorderSizePixel=0
-artList.CanvasSize=UDim2.new(0,0,0,0)
-artList.ScrollBarThickness=6
-local uiLayout=Instance.new("UIListLayout", artList)
-uiLayout.SortOrder=Enum.SortOrder.LayoutOrder
-uiLayout.Padding=UDim.new(0,2)
+local artList = Instance.new("ScrollingFrame", frame)
+artList.Size = UDim2.new(1,-10,0,90)
+artList.Position = UDim2.new(0,5,0,25)
+artList.BackgroundTransparency = 0.2
+artList.BackgroundColor3 = Color3.fromRGB(40,40,40)
+artList.BorderSizePixel = 0
+artList.CanvasSize = UDim2.new(0,0,0,0)
+artList.ScrollBarThickness = 6
+local uiLayout = Instance.new("UIListLayout", artList)
+uiLayout.SortOrder = Enum.SortOrder.LayoutOrder
+uiLayout.Padding = UDim.new(0,2)
 
--- Preview (texto simplificado)
-local preview=Instance.new("TextLabel", frame)
-preview.Size=UDim2.new(1,-10,0,20)
-preview.Position=UDim2.new(0,5,0,120)
-preview.BackgroundColor3=Color3.fromRGB(48,48,48)
-preview.TextColor3=Color3.new(1,1,1)
-preview.Font=Enum.Font.Code
-preview.TextSize=12
-preview.TextWrapped=true
-preview.Text="Preview: (clique em arte)"
-preview.TextXAlignment=Enum.TextXAlignment.Left
+-- Preview (texto curto apenas para identificação)
+local preview = Instance.new("TextLabel", frame)
+preview.Size = UDim2.new(1,-10,0,20)
+preview.Position = UDim2.new(0,5,0,120)
+preview.BackgroundColor3 = Color3.fromRGB(48,48,48)
+preview.TextColor3 = Color3.new(1,1,1)
+preview.Font = Enum.Font.Code
+preview.TextSize = 12
+preview.TextWrapped = true
+preview.Text = "Preview: (clique em arte)"
+preview.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Botão Começar/Parar
-local startBtn=Instance.new("TextButton", frame)
-startBtn.Size=UDim2.new(1,-10,0,20)
-startBtn.Position=UDim2.new(0,5,0,135)
-startBtn.Text="COMEÇAR"
-startBtn.Font=Enum.Font.SourceSansBold
-startBtn.TextSize=12
-startBtn.BackgroundColor3=Color3.fromRGB(180,50,50)
-startBtn.TextColor3=Color3.new(1,1,1)
-startBtn.BorderSizePixel=0
+local startBtn = Instance.new("TextButton", frame)
+startBtn.Size = UDim2.new(1,-10,0,20)
+startBtn.Position = UDim2.new(0,5,0,135)
+startBtn.Text = "COMEÇAR"
+startBtn.Font = Enum.Font.SourceSansBold
+startBtn.TextSize = 12
+startBtn.BackgroundColor3 = Color3.fromRGB(180,50,50)
+startBtn.TextColor3 = Color3.new(1,1,1)
+startBtn.BorderSizePixel = 0
 
 -- ======================
 -- Funções HUD
 -- ======================
-local loopActive=false
+local loopActive = false
 startBtn.MouseButton1Click:Connect(function()
-    loopActive=not loopActive
+    loopActive = not loopActive
     if loopActive then
-        startBtn.Text="PARAR"
-        startBtn.BackgroundColor3=Color3.fromRGB(50,180,50)
+        startBtn.Text = "PARAR"
+        startBtn.BackgroundColor3 = Color3.fromRGB(50,180,50)
     else
-        startBtn.Text="COMEÇAR"
-        startBtn.BackgroundColor3=Color3.fromRGB(180,50,50)
+        startBtn.Text = "COMEÇAR"
+        startBtn.BackgroundColor3 = Color3.fromRGB(180,50,50)
     end
 end)
 
 toggleBtn.MouseButton1Click:Connect(function()
-    frame.Visible=not frame.Visible
+    frame.Visible = not frame.Visible
 end)
 
 -- Limpar lista
@@ -209,27 +226,27 @@ local function clearArtList()
     for _,c in ipairs(artList:GetChildren()) do
         if c~=uiLayout then c:Destroy() end
     end
-    artList.CanvasSize=UDim2.new(0,0,0,0)
+    artList.CanvasSize = UDim2.new(0,0,0,0)
 end
 
 -- Adicionar artes na lista
 local function addArt(name,map)
-    local btn=Instance.new("TextButton",artList)
-    btn.Size=UDim2.new(1,0,0,20)
-    btn.BackgroundColor3=Color3.fromRGB(60,60,60)
-    btn.TextColor3=Color3.new(1,1,1)
-    btn.Text=name
-    btn.Font=Enum.Font.SourceSans
-    btn.TextSize=12
-    btn.AutoButtonColor=true
-    btn.BorderSizePixel=0
+    local btn = Instance.new("TextButton", artList)
+    btn.Size = UDim2.new(1,0,0,20)
+    btn.BackgroundColor3 = Color3.fromRGB(60,60,60)
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.Text = name
+    btn.Font = Enum.Font.SourceSans
+    btn.TextSize = 12
+    btn.AutoButtonColor = true
+    btn.BorderSizePixel = 0
 
     btn.MouseButton1Click:Connect(function()
-        preview.Text="Preview: AQUI"
-        preview._map=map
+        preview.Text = "Preview: AQUI"
+        preview._map = map
     end)
 
-    artList.CanvasSize=UDim2.new(0,0,0,uiLayout.AbsoluteContentSize.Y+4)
+    artList.CanvasSize = UDim2.new(0,0,0,uiLayout.AbsoluteContentSize.Y + 4)
 end
 
 clearArtList()
@@ -242,24 +259,24 @@ end
 -- ======================
 task.spawn(function()
     while true do
-        if loopActive and preview._map and preview._map~="" then
+        if loopActive and preview._map and preview._map ~= "" then
             parseTextToArt(preview._map)
-            local packet={}
-            local count=0
-            for i=1,TOTAL do
-                local realIndex=logicalToBoardIndex(i)
-                packet[tostring(realIndex)]=art[i]
-                count=count+1
-                if count>=64 then
+            local packet = {}
+            local count = 0
+            for i = 1, TOTAL do
+                local realIndex = logicalToBoardIndex(i)
+                packet[tostring(realIndex)] = art[i]
+                count = count + 1
+                if count >= 64 then
                     pcall(function()
                         if remote then remote:InvokeServer(packet) end
                     end)
-                    packet={}
-                    count=0
+                    packet = {}
+                    count = 0
                     task.wait(0.01)
                 end
             end
-            if count>0 then
+            if count > 0 then
                 pcall(function()
                     if remote then remote:InvokeServer(packet) end
                 end)
