@@ -20,7 +20,7 @@ local function logicalToBoardIndex(pixel)
 end
 
 -- ======================
--- AREA PARA COLOCAR SUAS ARTES
+-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
 -- ======================
 local ARTS = {
     { name = "peitos", map = [[Pixel 1 (0,0) = E0FBFF | Pixel 2 (1,0) = E0FBFF | Pixel 3 (2,0) = E0FBFF | Pixel 4 (3,0) = E2FAFD | Pixel 5 (4,0) = E6FAFF | Pixel 6 (5,0) = EAECE9 | Pixel 7 (6,0) = DE8F61 | Pixel 8 (7,0) = D18253 | Pixel 9 (8,0) = BE8367 | Pixel 10 (9,0) = E1F9FC | Pixel 11 (10,0) = E3FAFD | Pixel 12 (11,0) = E27978 | Pixel 13 (12,0) = FF867A | Pixel 14 (13,0) = FF8276 | Pixel 15 (14,0) = FF8276 | Pixel 16 (15,0) = FE8376 | Pixel 17 (16,0) = FF8175 | Pixel 18 (17,0) = FF8276 | Pixel 19 (18,0) = FF8276 | Pixel 20 (19,0) = FF8276 | Pixel 21 (20,0) = F47F76 | Pixel 22 (21,0) = E5E5E5 | Pixel 23 (22,0) = D7FBFF | Pixel 24 (23,0) = AF9E8A | Pixel 25 (24,0) = D28559 | Pixel 26 (25,0) = E19264 | Pixel 27 (26,0) = F5D9BE | Pixel 28 (27,0) = D7FBFF | Pixel 29 (28,0) = D9FAFF | Pixel 30 (29,0) = D7FBFF | Pixel 31 (30,0) = DCF9FD | Pixel 32 (31,0) = DEF8FD
@@ -56,10 +56,11 @@ Pixel 929 (0,29) = 6BBA6B | Pixel 930 (1,29) = 537C5C | Pixel 931 (2,29) = 47776
 Pixel 961 (0,30) = 04D002 | Pixel 962 (1,30) = 6AB96A | Pixel 963 (2,30) = 427968 | Pixel 964 (3,30) = 3E7567 | Pixel 965 (4,30) = 3E7567 | Pixel 966 (5,30) = 3E7567 | Pixel 967 (6,30) = 3E7567 | Pixel 968 (7,30) = 3E7567 | Pixel 969 (8,30) = D69987 | Pixel 970 (9,30) = E09981 | Pixel 971 (10,30) = E19881 | Pixel 972 (11,30) = FFDDC0 | Pixel 973 (12,30) = FAE2CA | Pixel 974 (13,30) = FEE9D0 | Pixel 975 (14,30) = FEE9D0 | Pixel 976 (15,30) = FEE9D0 | Pixel 977 (16,30) = FEE9D0 | Pixel 978 (17,30) = FEE9D0 | Pixel 979 (18,30) = FEE9D0 | Pixel 980 (19,30) = FEE9D0 | Pixel 981 (20,30) = FEDDC6 | Pixel 982 (21,30) = DAA184 | Pixel 983 (22,30) = E09981 | Pixel 984 (23,30) = E29D82 | Pixel 985 (24,30) = 506E5B | Pixel 986 (25,30) = 407465 | Pixel 987 (26,30) = 3F7364 | Pixel 988 (27,30) = 3F7364 | Pixel 989 (28,30) = 3F7867 | Pixel 990 (29,30) = 3D7665 | Pixel 991 (30,30) = 422C26 | Pixel 992 (31,30) = 2F2721
 Pixel 993 (0,31) = 00D001 | Pixel 994 (1,31) = 36894B | Pixel 995 (2,31) = 80A98C | Pixel 996 (3,31) = 3E7567 | Pixel 997 (4,31) = 3E7567 | Pixel 998 (5,31) = 3E7567 | Pixel 999 (6,31) = 3E7567 | Pixel 1000 (7,31) = CCCEB6 | Pixel 1001 (8,31) = FEE9D2 | Pixel 1002 (9,31) = FEE9D0 | Pixel 1003 (10,31) = FEE9D0 | Pixel 1004 (11,31) = FEE9D0 | Pixel 1005 (12,31) = FEE9D0 | Pixel 1006 (13,31) = FEE9D0 | Pixel 1007 (14,31) = FEE9D0 | Pixel 1008 (15,31) = FEE9D0 | Pixel 1009 (16,31) = FEE9D0 | Pixel 1010 (17,31) = FEE9D0 | Pixel 1011 (18,31) = FEE9D0 | Pixel 1012 (19,31) = FEE9D0 | Pixel 1013 (20,31) = FEE9D0 | Pixel 1014 (21,31) = FEE9D0 | Pixel 1015 (22,31) = FEE9D0 | Pixel 1016 (23,31) = FFECD2 | Pixel 1017 (24,31) = EBD1BA | Pixel 1018 (25,31) = 3E7565 | Pixel 1019 (26,31) = 3D7464 | Pixel 1020 (27,31) = 407465 | Pixel 1021 (28,31) = 3D7665 | Pixel 1022 (29,31) = 77A895 | Pixel 1023 (30,31) = CE6043 | Pixel 1024 (31,31) = 1B7A1A
 ]] },
-
-    -- SLOT
     
 }
+-- ======================
+-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
+-- ======================
 
 -- ======================
 -- ART BUFFER
