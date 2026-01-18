@@ -20,12 +20,12 @@ local function logicalToBoardIndex(pixel)
 end
 
 -- ======================
--- SLOTS (BOT EDITA AQUI) 
+-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
 -- ======================
 local ARTS = {
 
 }
---  FIM DOS SLOTS
+-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 -- ======================
 
 -- ======================
