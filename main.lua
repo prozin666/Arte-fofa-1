@@ -1245,7 +1245,8 @@ Pixel 961 (0,30) = FEFEFE | Pixel 962 (1,30) = FEFEFE | Pixel 963 (2,30) = FEFEF
 Pixel 993 (0,31) = FEFEFE | Pixel 994 (1,31) = FEFEFE | Pixel 995 (2,31) = FEFEFE | Pixel 996 (3,31) = FEFEFE | Pixel 997 (4,31) = FEFEFE | Pixel 998 (5,31) = FEFEFE | Pixel 999 (6,31) = FEFEFE | Pixel 1000 (7,31) = FEFEFE | Pixel 1001 (8,31) = FEFEFE | Pixel 1002 (9,31) = FEFEFE | Pixel 1003 (10,31) = FEFEFE | Pixel 1004 (11,31) = FEFEFE | Pixel 1005 (12,31) = FEFEFE | Pixel 1006 (13,31) = FEFEFE | Pixel 1007 (14,31) = FEFEFE | Pixel 1008 (15,31) = FEFEFE | Pixel 1009 (16,31) = FEFEFE | Pixel 1010 (17,31) = FEFEFE | Pixel 1011 (18,31) = FEFEFE | Pixel 1012 (19,31) = FEFEFE | Pixel 1013 (20,31) = FEFEFE | Pixel 1014 (21,31) = FEFEFE | Pixel 1015 (22,31) = FEFEFE | Pixel 1016 (23,31) = FEFEFE | Pixel 1017 (24,31) = FEFEFE | Pixel 1018 (25,31) = FEFEFE | Pixel 1019 (26,31) = FEFEFE | Pixel 1020 (27,31) = FEFEFE | Pixel 1021 (28,31) = FEFEFE | Pixel 1022 (29,31) = FEFEFE | Pixel 1023 (30,31) = FEFEFE | Pixel 1024 (31,31) = FEFEFE
         ]]
     }}
-"-- FIM DOS SLOTS
+-- ======================
+-- FIM DOS SLOTS
 -- ======================
 
 -- ======================
