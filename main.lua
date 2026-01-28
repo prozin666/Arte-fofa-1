@@ -22,6 +22,7 @@ end
 -- ======================
 -- SLOTS (BOT EDITA AQUI)
 -- ======================
+-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
 local ARTS = {
 
     {
