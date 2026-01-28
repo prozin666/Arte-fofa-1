@@ -20,9 +20,8 @@ local function logicalToBoardIndex(pixel)
 end
 
 -- ======================
--- SLOTS (BOT EDITA AQUI)
--- ======================
 -- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
+-- ======================
 local ARTS = {
 
     {
@@ -1247,7 +1246,7 @@ Pixel 993 (0,31) = FEFEFE | Pixel 994 (1,31) = FEFEFE | Pixel 995 (2,31) = FEFEF
         ]]
     }}
 -- ======================
--- FIM DOS SLOTS
+-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 -- ======================
 
 -- ======================
