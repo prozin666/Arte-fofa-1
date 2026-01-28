@@ -20,7 +20,7 @@ local function logicalToBoardIndex(pixel)
 end
 
 -- ======================
-"-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇"
+-- SLOTS (BOT EDITA AQUI)
 -- ======================
 local ARTS = {
 
@@ -1133,7 +1133,8 @@ Pixel 929 (0,29) = 747273 | Pixel 930 (1,29) = 747273 | Pixel 931 (2,29) = 38363
 Pixel 961 (0,30) = 747273 | Pixel 962 (1,30) = 747273 | Pixel 963 (2,30) = 747275 | Pixel 964 (3,30) = 121011 | Pixel 965 (4,30) = 0F0B08 | Pixel 966 (5,30) = 100A0A | Pixel 967 (6,30) = 10070A | Pixel 968 (7,30) = 0C0807 | Pixel 969 (8,30) = 0D0405 | Pixel 970 (9,30) = 130A0B | Pixel 971 (10,30) = 100A0A | Pixel 972 (11,30) = 100A0A | Pixel 973 (12,30) = 100A0A | Pixel 974 (13,30) = 110B0B | Pixel 975 (14,30) = 110C09 | Pixel 976 (15,30) = 0F0909 | Pixel 977 (16,30) = 0B0A08 | Pixel 978 (17,30) = 0B0A08 | Pixel 979 (18,30) = 0B0A08 | Pixel 980 (19,30) = 0B0A08 | Pixel 981 (20,30) = 0D0C0A | Pixel 982 (21,30) = 120C0C | Pixel 983 (22,30) = 120C0C | Pixel 984 (23,30) = 120C0C | Pixel 985 (24,30) = 120C0C | Pixel 986 (25,30) = 140E0E | Pixel 987 (26,30) = 120C0C | Pixel 988 (27,30) = 110B0B | Pixel 989 (28,30) = 120C0C | Pixel 990 (29,30) = 120C0C | Pixel 991 (30,30) = 0D0D0B | Pixel 992 (31,30) = 0B0A08
 Pixel 993 (0,31) = 747273 | Pixel 994 (1,31) = 747273 | Pixel 995 (2,31) = 747275 | Pixel 996 (3,31) = 747273 | Pixel 997 (4,31) = 302826 | Pixel 998 (5,31) = 2A1814 | Pixel 999 (6,31) = 30221F | Pixel 1000 (7,31) = 312320 | Pixel 1001 (8,31) = 1C1210 | Pixel 1002 (9,31) = 686262 | Pixel 1003 (10,31) = 191313 | Pixel 1004 (11,31) = 0E0D0B | Pixel 1005 (12,31) = 0E0D0B | Pixel 1006 (13,31) = 110B0B | Pixel 1007 (14,31) = 0F0E0C | Pixel 1008 (15,31) = 0D0C0A | Pixel 1009 (16,31) = 0C0B09 | Pixel 1010 (17,31) = 0C0B09 | Pixel 1011 (18,31) = 0C0B09 | Pixel 1012 (19,31) = 0D0C0A | Pixel 1013 (20,31) = 0E0D0B | Pixel 1014 (21,31) = 140E0E | Pixel 1015 (22,31) = 130D0D | Pixel 1016 (23,31) = 140E0E | Pixel 1017 (24,31) = 150F0F | Pixel 1018 (25,31) = 140E0E | Pixel 1019 (26,31) = 140E0E | Pixel 1020 (27,31) = 120C0C | Pixel 1021 (28,31) = 120C0C | Pixel 1022 (29,31) = 120C0C | Pixel 1023 (30,31) = 0F0D0E | Pixel 1024 (31,31) = 090708
         ]]
-    },    {
+    },    
+    {
         name = "Gat",
         map = [[
 Pixel 1 (0,0) = 2A095F | Pixel 2 (1,0) = 29085E | Pixel 3 (2,0) = 29085E | Pixel 4 (3,0) = 29085F | Pixel 5 (4,0) = 2A085F | Pixel 6 (5,0) = 2A085F | Pixel 7 (6,0) = 29085F | Pixel 8 (7,0) = 2A085F | Pixel 9 (8,0) = 29085F | Pixel 10 (9,0) = 29085F | Pixel 11 (10,0) = 29085F | Pixel 12 (11,0) = 29085E | Pixel 13 (12,0) = 29085E | Pixel 14 (13,0) = 29085F | Pixel 15 (14,0) = 29085F | Pixel 16 (15,0) = 29085E | Pixel 17 (16,0) = 29085F | Pixel 18 (17,0) = 29085F | Pixel 19 (18,0) = 28075E | Pixel 20 (19,0) = 28085E | Pixel 21 (20,0) = 28085E | Pixel 22 (21,0) = 29085F | Pixel 23 (22,0) = 29085F | Pixel 24 (23,0) = 2A0960 | Pixel 25 (24,0) = 2A0860 | Pixel 26 (25,0) = 2A0860 | Pixel 27 (26,0) = 2A0860 | Pixel 28 (27,0) = 29085F | Pixel 29 (28,0) = 29085F | Pixel 30 (29,0) = 29085E | Pixel 31 (30,0) = 2A085F | Pixel 32 (31,0) = 2A095F
@@ -1169,7 +1170,6 @@ Pixel 929 (0,29) = 29085F | Pixel 930 (1,29) = 4B0581 | Pixel 931 (2,29) = 4B047
 Pixel 961 (0,30) = 2A095F | Pixel 962 (1,30) = 4B0482 | Pixel 963 (2,30) = 4C037E | Pixel 964 (3,30) = 4B027C | Pixel 965 (4,30) = 220551 | Pixel 966 (5,30) = 01020B | Pixel 967 (6,30) = 01010B | Pixel 968 (7,30) = 01020C | Pixel 969 (8,30) = 01020B | Pixel 970 (9,30) = 02020B | Pixel 971 (10,30) = 02020B | Pixel 972 (11,30) = 02020C | Pixel 973 (12,30) = 01030E | Pixel 974 (13,30) = 02030E | Pixel 975 (14,30) = 02030E | Pixel 976 (15,30) = 02040F | Pixel 977 (16,30) = 02030E | Pixel 978 (17,30) = 02030E | Pixel 979 (18,30) = 02030E | Pixel 980 (19,30) = 02030E | Pixel 981 (20,30) = 02030E | Pixel 982 (21,30) = 02030D | Pixel 983 (22,30) = 02030E | Pixel 984 (23,30) = 02030E | Pixel 985 (24,30) = 01030C | Pixel 986 (25,30) = 01010B | Pixel 987 (26,30) = 03000D | Pixel 988 (27,30) = 2D066F | Pixel 989 (28,30) = 4E0482 | Pixel 990 (29,30) = 851AC3 | Pixel 991 (30,30) = 871BC5 | Pixel 992 (31,30) = 2B0A60
 Pixel 993 (0,31) = 2B0960 | Pixel 994 (1,31) = 2A0960 | Pixel 995 (2,31) = 2A0960 | Pixel 996 (3,31) = 2A095F | Pixel 997 (4,31) = 2A095F | Pixel 998 (5,31) = 2A095F | Pixel 999 (6,31) = 2A095F | Pixel 1000 (7,31) = 2A095F | Pixel 1001 (8,31) = 2A085F | Pixel 1002 (9,31) = 2B0961 | Pixel 1003 (10,31) = 2B0961 | Pixel 1004 (11,31) = 2A0960 | Pixel 1005 (12,31) = 2A0960 | Pixel 1006 (13,31) = 2B0960 | Pixel 1007 (14,31) = 2B0961 | Pixel 1008 (15,31) = 2B0961 | Pixel 1009 (16,31) = 2B0961 | Pixel 1010 (17,31) = 2B0960 | Pixel 1011 (18,31) = 2A0960 | Pixel 1012 (19,31) = 2B0961 | Pixel 1013 (20,31) = 2B0961 | Pixel 1014 (21,31) = 2B0961 | Pixel 1015 (22,31) = 2B0960 | Pixel 1016 (23,31) = 2B0960 | Pixel 1017 (24,31) = 2B0960 | Pixel 1018 (25,31) = 2B0960 | Pixel 1019 (26,31) = 2B0960 | Pixel 1020 (27,31) = 2B0960 | Pixel 1021 (28,31) = 2B0960 | Pixel 1022 (29,31) = 2B095F | Pixel 1023 (30,31) = 2A095F | Pixel 1024 (31,31) = 2B0960
         ]]
-    },
     },
     {
         name = "Andressa roblox",
@@ -1245,7 +1245,7 @@ Pixel 961 (0,30) = FEFEFE | Pixel 962 (1,30) = FEFEFE | Pixel 963 (2,30) = FEFEF
 Pixel 993 (0,31) = FEFEFE | Pixel 994 (1,31) = FEFEFE | Pixel 995 (2,31) = FEFEFE | Pixel 996 (3,31) = FEFEFE | Pixel 997 (4,31) = FEFEFE | Pixel 998 (5,31) = FEFEFE | Pixel 999 (6,31) = FEFEFE | Pixel 1000 (7,31) = FEFEFE | Pixel 1001 (8,31) = FEFEFE | Pixel 1002 (9,31) = FEFEFE | Pixel 1003 (10,31) = FEFEFE | Pixel 1004 (11,31) = FEFEFE | Pixel 1005 (12,31) = FEFEFE | Pixel 1006 (13,31) = FEFEFE | Pixel 1007 (14,31) = FEFEFE | Pixel 1008 (15,31) = FEFEFE | Pixel 1009 (16,31) = FEFEFE | Pixel 1010 (17,31) = FEFEFE | Pixel 1011 (18,31) = FEFEFE | Pixel 1012 (19,31) = FEFEFE | Pixel 1013 (20,31) = FEFEFE | Pixel 1014 (21,31) = FEFEFE | Pixel 1015 (22,31) = FEFEFE | Pixel 1016 (23,31) = FEFEFE | Pixel 1017 (24,31) = FEFEFE | Pixel 1018 (25,31) = FEFEFE | Pixel 1019 (26,31) = FEFEFE | Pixel 1020 (27,31) = FEFEFE | Pixel 1021 (28,31) = FEFEFE | Pixel 1022 (29,31) = FEFEFE | Pixel 1023 (30,31) = FEFEFE | Pixel 1024 (31,31) = FEFEFE
         ]]
     }}
-"-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆"
+"-- FIM DOS SLOTS
 -- ======================
 
 -- ======================
