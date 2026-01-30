@@ -1281,7 +1281,6 @@ Pixel 961 (0,30) = 000000 | Pixel 962 (1,30) = 000000 | Pixel 963 (2,30) = 00000
 Pixel 993 (0,31) = 000000 | Pixel 994 (1,31) = 000000 | Pixel 995 (2,31) = 000000 | Pixel 996 (3,31) = 000000 | Pixel 997 (4,31) = 000000 | Pixel 998 (5,31) = 000000 | Pixel 999 (6,31) = 000000 | Pixel 1000 (7,31) = 000000 | Pixel 1001 (8,31) = E4DCD8 | Pixel 1002 (9,31) = EFE7E3 | Pixel 1003 (10,31) = EEE4E0 | Pixel 1004 (11,31) = F4F1EC | Pixel 1005 (12,31) = EAE7E5 | Pixel 1006 (13,31) = E2E2E2 | Pixel 1007 (14,31) = D6D6D6 | Pixel 1008 (15,31) = DFDFDF | Pixel 1009 (16,31) = F3F3F3 | Pixel 1010 (17,31) = FFFFFF | Pixel 1011 (18,31) = FFFFFF | Pixel 1012 (19,31) = FFFFFF | Pixel 1013 (20,31) = FFFFFF | Pixel 1014 (21,31) = FFFFFF | Pixel 1015 (22,31) = FFFFFF | Pixel 1016 (23,31) = FFFFFF | Pixel 1017 (24,31) = FFFFFF | Pixel 1018 (25,31) = FFFFFE | Pixel 1019 (26,31) = FFFFF9 | Pixel 1020 (27,31) = FFFFFF | Pixel 1021 (28,31) = 000000 | Pixel 1022 (29,31) = 000000 | Pixel 1023 (30,31) = 000000 | Pixel 1024 (31,31) = 000000
         ]]
     }
-    }
 }
 
 -- ======================
