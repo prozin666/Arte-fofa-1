@@ -24,10 +24,7 @@ local function logicalToBoardIndex(pixel)
 end
 
 -- ======================
--- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇-- ======================
-local ARTS = {
-    {
--- ======================
+-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
 local ARTS = {
     {
         name = "Gelo",
@@ -65,9 +62,9 @@ Pixel 929 (0,29) = 0D0D0D | Pixel 930 (1,29) = 1D1D1D | Pixel 931 (2,29) = 3A3A3
 Pixel 961 (0,30) = 0D0D0D | Pixel 962 (1,30) = 0D0D0D | Pixel 963 (2,30) = 393939 | Pixel 964 (3,30) = 010101 | Pixel 965 (4,30) = 010101 | Pixel 966 (5,30) = 010101 | Pixel 967 (6,30) = 010101 | Pixel 968 (7,30) = 7F7F7F | Pixel 969 (8,30) = C4C4C4 | Pixel 970 (9,30) = 494949 | Pixel 971 (10,30) = D1D1D1 | Pixel 972 (11,30) = 5C5B56 | Pixel 973 (12,30) = C8C8C8 | Pixel 974 (13,30) = BABABA | Pixel 975 (14,30) = CFCFCF | Pixel 976 (15,30) = CFCFCF | Pixel 977 (16,30) = D2D2D2 | Pixel 978 (17,30) = D2D2D2 | Pixel 979 (18,30) = BCBCBC | Pixel 980 (19,30) = CECECE | Pixel 981 (20,30) = 686765 | Pixel 982 (21,30) = 5C5C5C | Pixel 983 (22,30) = 3E3E3E | Pixel 984 (23,30) = CBCBCB | Pixel 985 (24,30) = 454545 | Pixel 986 (25,30) = 010101 | Pixel 987 (26,30) = 010101 | Pixel 988 (27,30) = 010101 | Pixel 989 (28,30) = 080808 | Pixel 990 (29,30) = 050505 | Pixel 991 (30,30) = 131313 | Pixel 992 (31,30) = 131313
 Pixel 993 (0,31) = 010101 | Pixel 994 (1,31) = 010101 | Pixel 995 (2,31) = 0B0B0B | Pixel 996 (3,31) = 010101 | Pixel 997 (4,31) = 010101 | Pixel 998 (5,31) = 010101 | Pixel 999 (6,31) = 010101 | Pixel 1000 (7,31) = 010101 | Pixel 1001 (8,31) = C1C1C1 | Pixel 1002 (9,31) = B9B9B9 | Pixel 1003 (10,31) = 262626 | Pixel 1004 (11,31) = C8C8C8 | Pixel 1005 (12,31) = 989898 | Pixel 1006 (13,31) = 9D9D9D | Pixel 1007 (14,31) = ACACAC | Pixel 1008 (15,31) = CECECE | Pixel 1009 (16,31) = D2D2D2 | Pixel 1010 (17,31) = 9E9E9E | Pixel 1011 (18,31) = 9D9D9D | Pixel 1012 (19,31) = B5B5B5 | Pixel 1013 (20,31) = C7C7C7 | Pixel 1014 (21,31) = 7B7B7B | Pixel 1015 (22,31) = CDCDCD | Pixel 1016 (23,31) = B8B8B8 | Pixel 1017 (24,31) = 010101 | Pixel 1018 (25,31) = 010101 | Pixel 1019 (26,31) = 010101 | Pixel 1020 (27,31) = 010101 | Pixel 1021 (28,31) = 080808 | Pixel 1022 (29,31) = 010101 | Pixel 1023 (30,31) = 010101 | Pixel 1024 (31,31) = 010101
         ]]
-    },
-},
--- ======================-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
+    }
+}
+-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 -- ======================
 
 -- ======================
