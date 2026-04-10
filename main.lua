@@ -28,14 +28,15 @@ local ARTS = {
     {
         name = "Slot 1",
         map = [[
-       ]]
+
+        ]]
     },
     {
         name = "Slot 2",
         map = [[
+
         ]]
-    },
-    -- Adicione quantos slots quiser aqui ↓
+    }
 }
 
 -- ======================
