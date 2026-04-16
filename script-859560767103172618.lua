@@ -17,8 +17,6 @@ local ARTS = {
         map = [[Pixel 1 (0,0) = FF0000 | Pixel 2 (1,0) = 00FF00 | Pixel 1024 (31,31) = 0000FF]]
     },
 }
-
-    {
         name = "cat-space.gif",
         playlist = "GIFs",
         isGif = true,
