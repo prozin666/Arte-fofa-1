@@ -1,0 +1,399 @@
+-- ======================
+-- PIXEL PAINTER PRO (V5.2 - HUD COMPACT + FIXES)
+-- ======================
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local GRID = 32
+local TOTAL = GRID * GRID
+
+-- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
+local ARTS = {
+    {
+        name = "Exemplo Base (32x32)",
+        playlist = "Todas",
+        map = [[Pixel 1 (0,0) = FF0000 | Pixel 2 (1,0) = 00FF00 | Pixel 1024 (31,31) = 0000FF]]
+    },
+}
+-- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
+
+local PLAYLISTS = {"Todas", "Aleatórias", "NSFW", "Memes", "Players"}
+
+local selectedMap = nil
+local selectedArtName = ""
+local selectedArtSize = "32x32"
+local isPainting = false
+local currentPlaylist = "Todas"
+
+local remote = game.ReplicatedStorage:FindFirstChild("UpdateBoard") or game.Workspace:FindFirstChild("UpdateBoard", true)
+
+-- ======================
+-- UTILITÁRIOS
+-- ======================
+
+local function logicalToBoardIndex(pixel)
+    local zero = pixel - 1
+    local y = math.floor(zero / GRID)
+    local x = zero % GRID
+    local boardIdx = y * GRID + ((GRID - 1) - x) + 1
+    return boardIdx
+end
+
+local function getMyBoard()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if obj.Name == "1" and obj:IsA("BasePart") and obj.Parent:FindFirstChild(tostring(TOTAL)) then
+            return obj.Parent
+        end
+    end
+    return nil
+end
+
+local function parseTextToArt(text)
+    local art = {}
+    for idx, hex in text:gmatch("Pixel%s+(%d+)[^=]*=%s*([A-Fa-f0-9]+)") do
+        local n = tonumber(idx)
+        if n and n >= 1 and n <= TOTAL then 
+            art[n] = hex:upper() 
+        end
+    end
+    return art
+end
+
+local function hexToColor3(hex)
+    local r = tonumber(hex:sub(1,2),16)
+    local g = tonumber(hex:sub(3,4),16)
+    local b = tonumber(hex:sub(5,6),16)
+    return Color3.fromRGB(r or 255, g or 255, b or 255)
+end
+
+-- ======================
+-- FUNÇÃO DE VERIFICAÇÃO RÁPIDA (para manter "Arte Feita ✅")
+-- ======================
+local function checkArtStatus(board, artData, setProgress)
+    if not board or not artData then 
+        setProgress("Aguardando...")
+        return 
+    end
+
+    local needUpdate = 0
+    for i, desiredHex in pairs(artData) do
+        local boardIdx = logicalToBoardIndex(i)
+        local pixelPart = board:FindFirstChild(tostring(boardIdx))
+        if pixelPart and pixelPart:IsA("BasePart") then
+            local targetColor = hexToColor3(desiredHex)
+            local diff = (pixelPart.Color.R - targetColor.R)^2 + 
+                         (pixelPart.Color.G - targetColor.G)^2 + 
+                         (pixelPart.Color.B - targetColor.B)^2
+            if diff > 0.001 then
+                needUpdate = needUpdate + 1
+            end
+        end
+    end
+
+    if needUpdate == 0 then
+        setProgress("Arte Feita ✅")
+    else
+        setProgress("Pronto para pintar!")
+    end
+end
+
+-- ======================
+-- LOOP DE PINTURA
+-- ======================
+local function startSmartPaint(updateBar, setProgress)
+    if isPainting or not selectedMap or not remote then 
+        setProgress("❌ SEM ARTE SELECIONADA")
+        task.wait(1.5)
+        checkArtStatus(getMyBoard(), parseTextToArt(selectedMap), setProgress)
+        return 
+    end
+    
+    isPainting = true
+    local board = getMyBoard()
+    local artData = parseTextToArt(selectedMap)
+    
+    local needUpdate = {}
+    
+    setProgress("🔍 Escaneando quadro...")
+
+    if board then
+        for i, desiredHex in pairs(artData) do
+            local boardIdx = logicalToBoardIndex(i)
+            local pixelPart = board:FindFirstChild(tostring(boardIdx))
+            
+            if pixelPart and pixelPart:IsA("BasePart") then
+                local targetColor = hexToColor3(desiredHex)
+                local diff = (pixelPart.Color.R - targetColor.R)^2 + 
+                             (pixelPart.Color.G - targetColor.G)^2 + 
+                             (pixelPart.Color.B - targetColor.B)^2
+                
+                if diff > 0.001 then
+                    table.insert(needUpdate, {id = tostring(boardIdx), color = desiredHex})
+                end
+            end
+        end
+    else
+        setProgress("❌ QUADRO NÃO ENCONTRADO")
+        task.wait(2)
+        checkArtStatus(board, artData, setProgress)
+        isPainting = false
+        return
+    end
+
+    local totalToPaint = #needUpdate
+    if totalToPaint == 0 then
+        setProgress("Arte Feita ✅")
+        updateBar(1)
+        task.wait(1.5)
+        isPainting = false
+        return
+    end
+
+    -- Pintura
+    local packet = {}
+    local painted = 0
+
+    for i, data in ipairs(needUpdate) do
+        packet[data.id] = data.color
+        painted = i
+        
+        local percent = painted / totalToPaint
+        updateBar(percent)
+        setProgress("Arte Carregando... " .. math.floor(percent * 100) .. "%")
+
+        if #packet >= 128 or i == totalToPaint then
+            pcall(function() remote:InvokeServer(packet) end)
+            packet = {}
+            task.wait(0.02)
+        end
+    end
+
+    setProgress("Arte Feita ✅")
+    updateBar(1)
+    task.wait(1.5)
+    isPainting = false
+end
+
+-- ======================
+-- INTERFACE COMPACTADA (cabe na tela)
+-- ======================
+local function createGUI()
+    if playerGui:FindFirstChild("PixelPainterHUD") then 
+        playerGui.PixelPainterHUD:Destroy() 
+    end
+
+    local gui = Instance.new("ScreenGui", playerGui)
+    gui.Name = "PixelPainterHUD"
+    gui.ResetOnSpawn = false
+
+    -- Toggle Button
+    local toggle = Instance.new("TextButton", gui)
+    toggle.Size = UDim2.new(0, 40, 0, 40)
+    toggle.Position = UDim2.new(1, -50, 0, 20)
+    toggle.Text = "🎨"
+    toggle.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+    toggle.TextColor3 = Color3.new(1,1,1)
+    Instance.new("UICorner", toggle)
+
+    -- Main Frame (menor altura para não sair da tela)
+    local main = Instance.new("Frame", gui)
+    main.Size = UDim2.new(0, 280, 0, 325)  -- ← Reduzido (antes estava 380)
+    main.AnchorPoint = Vector2.new(1, 0.5)
+    main.Position = UDim2.new(1, -10, 0.5, 0)
+    main.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+    main.BackgroundTransparency = 0.15
+    main.Visible = false
+    main.Active = true
+    main.Draggable = true
+    Instance.new("UICorner", main)
+
+    toggle.MouseButton1Click:Connect(function() main.Visible = not main.Visible end)
+
+    -- Playlists (corrigido - agora aparece os nomes)
+    local plFrame = Instance.new("ScrollingFrame", main)
+    plFrame.Size = UDim2.new(1, -20, 0, 30)
+    plFrame.Position = UDim2.new(0, 10, 0, 10)
+    plFrame.BackgroundTransparency = 1
+    plFrame.ScrollBarThickness = 0
+    plFrame.CanvasSize = UDim2.new(2, 0, 0, 0)  -- ← Fix para mostrar todos
+    local plLayout = Instance.new("UIListLayout", plFrame)
+    plLayout.FillDirection = Enum.FillDirection.Horizontal
+    plLayout.Padding = UDim.new(0, 5)
+
+    -- Artes Scroll
+    local artScroll = Instance.new("ScrollingFrame", main)
+    artScroll.Size = UDim2.new(0, 120, 0, 200)  -- ← Reduzido um pouco
+    artScroll.Position = UDim2.new(0, 10, 0, 50)
+    artScroll.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+    artScroll.BackgroundTransparency = 0.3
+    artScroll.ScrollBarThickness = 2
+    Instance.new("UIListLayout", artScroll).Padding = UDim.new(0, 2)
+
+    -- Preview
+    local previewHUD = Instance.new("Frame", main)
+    previewHUD.Size = UDim2.new(0, 130, 0, 130)
+    previewHUD.Position = UDim2.new(0, 140, 0, 50)
+    previewHUD.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    previewHUD.BackgroundTransparency = 0.2
+    local previewGrid = Instance.new("UIGridLayout", previewHUD)
+    previewGrid.CellSize = UDim2.new(0, 4, 0, 4)
+    previewGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+
+    local pixels = {}
+    for i = 1, TOTAL do
+        local p = Instance.new("Frame", previewHUD)
+        p.BorderSizePixel = 0
+        p.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        pixels[i] = p
+    end
+
+    -- Barra de Progresso
+    local progBg = Instance.new("Frame", main)
+    progBg.Size = UDim2.new(0, 130, 0, 15)
+    progBg.Position = UDim2.new(0, 140, 0, 190)
+    progBg.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+    Instance.new("UICorner", progBg)
+
+    local progBar = Instance.new("Frame", progBg)
+    progBar.Size = UDim2.new(0, 0, 1, 0)
+    progBar.BackgroundColor3 = Color3.fromRGB(0, 255, 120)
+    Instance.new("UICorner", progBar)
+
+    local progTxt = Instance.new("TextLabel", progBg)
+    progTxt.Size = UDim2.new(1, 0, 1, 0)
+    progTxt.BackgroundTransparency = 1
+    progTxt.Text = "Aguardando..."
+    progTxt.TextColor3 = Color3.new(1,1,1)
+    progTxt.TextSize = 11
+    progTxt.Font = Enum.Font.GothamSemibold
+
+    -- Botão Iniciar Arte
+    local start = Instance.new("TextButton", main)
+    start.Size = UDim2.new(0, 130, 0, 35)
+    start.Position = UDim2.new(0, 140, 0, 215)
+    start.Text = "INICIAR ARTE"
+    start.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+    start.TextColor3 = Color3.new(1,1,1)
+    start.TextSize = 13
+    Instance.new("UICorner", start)
+
+    -- === INFORMAÇÕES DA ARTE (compacto + texto maior + só data) ===
+    local infoFrame = Instance.new("Frame", main)
+    infoFrame.Size = UDim2.new(0, 130, 0, 75)  -- ← Menor para caber
+    infoFrame.Position = UDim2.new(0, 140, 0, 255)
+    infoFrame.BackgroundTransparency = 1
+
+    local infoLabel = Instance.new("TextLabel", infoFrame)
+    infoLabel.Size = UDim2.new(1, 0, 1, 0)
+    infoLabel.BackgroundTransparency = 1
+    infoLabel.TextColor3 = Color3.new(0.9, 0.9, 0.9)
+    infoLabel.TextSize = 12.5  -- ← Um pouco maior como pediu
+    infoLabel.Font = Enum.Font.GothamMedium
+    infoLabel.TextXAlignment = Enum.TextXAlignment.Left
+    infoLabel.TextYAlignment = Enum.TextYAlignment.Top
+    infoLabel.TextWrapped = true
+
+    -- Funções de UI
+    local function updateBar(percent)
+        progBar.Size = UDim2.new(math.clamp(percent, 0, 1), 0, 1, 0)
+    end
+
+    local function setProgress(txt)
+        progTxt.Text = txt
+    end
+
+    local function updateInfo()
+        local dataHoje = os.date("%d/%m/%Y")  -- só data (exemplo de hoje)
+        infoLabel.Text = "Nome: " .. selectedArtName .. "\n" ..
+                        "Adicionada em: " .. dataHoje .. "\n" ..
+                        "Tamanho: " .. selectedArtSize
+    end
+
+    local function updatePreview(mapText)
+        local art = {}
+        for i = 1, TOTAL do art[i] = "FFFFFF" end
+        for idx, hex in mapText:gmatch("Pixel%s+(%d+)[^=]*=%s*([A-Fa-f0-9]+)") do
+            local n = tonumber(idx)
+            if n then art[n] = hex:upper() end
+        end
+        for i = 1, TOTAL do 
+            pixels[i].BackgroundColor3 = Color3.fromHex(art[i]) 
+        end
+    end
+
+    start.MouseButton1Click:Connect(function()
+        startSmartPaint(updateBar, setProgress)
+    end)
+
+    -- Carregamento de Artes
+    local function loadArts()
+        for _, c in ipairs(artScroll:GetChildren()) do 
+            if c:IsA("TextButton") then c:Destroy() end 
+        end
+
+        for _, art in ipairs(ARTS) do
+            if currentPlaylist == "Todas" or art.playlist == currentPlaylist then
+                local btn = Instance.new("TextButton", artScroll)
+                btn.Size = UDim2.new(1, -5, 0, 25)
+                btn.Text = art.name
+                btn.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
+                btn.TextColor3 = Color3.new(1,1,1)
+                btn.TextSize = 10
+                Instance.new("UICorner", btn)
+
+                btn.MouseButton1Click:Connect(function()
+                    selectedMap = art.map
+                    selectedArtName = art.name
+                    
+                    if art.name:lower():find("16x16") then
+                        selectedArtSize = "16x16"
+                    else
+                        selectedArtSize = "32x32"
+                    end
+                    
+                    updatePreview(art.map)
+                    updateInfo()
+
+                    -- Destaca botão
+                    for _, b in ipairs(artScroll:GetChildren()) do 
+                        if b:IsA("TextButton") then b.BackgroundColor3 = Color3.fromRGB(45, 45, 50) end 
+                    end
+                    btn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+
+                    progBar.Size = UDim2.new(0, 0, 1, 0)
+                    
+                    -- VERIFICA SE JÁ ESTÁ FEITA (resolve o problema de status)
+                    local board = getMyBoard()
+                    local artData = parseTextToArt(selectedMap)
+                    checkArtStatus(board, artData, setProgress)
+                end)
+            end
+        end
+    end
+
+    -- Playlists (agora com nomes visíveis)
+    for _, name in ipairs(PLAYLISTS) do
+        local plBtn = Instance.new("TextButton", plFrame)
+        plBtn.Size = UDim2.new(0, 65, 1, 0)
+        plBtn.Text = name
+        plBtn.TextSize = 9
+        plBtn.BackgroundColor3 = (name == "Todas") and Color3.fromRGB(70, 130, 180) or Color3.fromRGB(45, 45, 50)
+        plBtn.TextColor3 = Color3.new(1,1,1)
+        Instance.new("UICorner", plBtn)
+
+        plBtn.MouseButton1Click:Connect(function()
+            currentPlaylist = name
+            for _, b in ipairs(plFrame:GetChildren()) do 
+                if b:IsA("TextButton") then b.BackgroundColor3 = Color3.fromRGB(45, 45, 50) end 
+            end
+            plBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+            loadArts()
+        end)
+    end
+
+    loadArts()
+end
+
+createGUI()
