@@ -14,8 +14,10 @@ local ARTS = {
     {
         name = "Exemplo",
         playlist = "Todas",
-        map = [[Pixel 1 (0,0) = FF0000 | Pixel 2 (1,0) = 00FF00 | Pixel 1024 (31,31) = 0000FF]]
-    },
+        map = [[
+Pixel 1 (0,0) = FF0000 | Pixel 2 (1,0) = 00FF00 | Pixel 1024 (31,31) = 0000FF
+        ]]
+    }
 }
 -- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 
