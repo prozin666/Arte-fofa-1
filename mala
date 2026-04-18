@@ -15,9 +15,10 @@ local ARTS = {
     {
         name = "Exemplo Base (32x32)",
         playlist = "Todas",
-        map = [[Pixel 1 (0,0) = FF0000 | ... ]]
-    },
-    -- Suas 40+ artes ficam aqui (não mexa)
+        map = [[
+Pixel 1 (0,0) = FF0000 | ...
+        ]]
+    }
 }
 -- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 
