@@ -694,9 +694,11 @@ local function buildPainterGUI(content)
 	local currentTOTAL = 1024
 
 -- ⬇⬇⬇ SLOTS (BOT EDITA AQUI) ⬇⬇⬇
-	local ARTS = {
-		{ name = "Exemplo Base (32x32)", playlist = "Todas", map = "Pixel 1 = FF0000 | Pixel 2 = 00FF00 | Pixel 3 = 0000FF" },
-	}
+local ARTS = {
+    { name = "Exemplo Base (32x32)", playlist = "Todas", map = [[
+Pixel 1 = FF0000 | Pixel 2 = 00FF00 | Pixel 3 = 0000FF
+    ]] },
+}
 -- ⬆⬆⬆ FIM DOS SLOTS ⬆⬆⬆
 
 	local PLAYLISTS = {"Todas", "Cópias", "Aleatórias", "NSFW", "Memes", "Players"}
